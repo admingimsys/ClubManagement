@@ -1,0 +1,183 @@
+﻿@model ReferredVM
+
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">اطلاعات مراجعه کننده</h4>
+    </div>
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            <div class="card-body">
+                <div class="row">
+                    <h4 class="card-title">اطلاعات  فرد </h4>
+                    <div class="col-xl-6">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">نام</label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.referred.Name" type="text" class="form-control">
+                                <span asp-validation-for="@Model.referred.Name"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">نام خانوادگی</label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.referred.Family" type="text" class="form-control">
+                                <span asp-validation-for="@Model.referred.Family"></span>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">کد ملی</label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.referred.NationalCode" type="text" class="form-control">
+                                <span asp-validation-for="@Model.referred.NationalCode"></span>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">تلفن</label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.referred.Phone" type="text" class="form-control">
+                                <span asp-validation-for="@Model.referred.Phone"></span>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">موبایل</label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.referred.Mobile" type="text" class="form-control">
+                                <span asp-validation-for="@Model.referred.Mobile"></span>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label"> تاریخ تولد</label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.birthDate" class="form-control  from  date">
+                                <span asp-validation-for="@Model.referred.BirthDate"></span>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">جنسیت</label>
+                            <div class="col-lg-9">
+                                <div class="form-check form-check-inline">
+                                    <input asp-for="@Model.gender" class="form-check-input" type="radio" value="1" checked="checked">
+                                    <label class="form-check-label">
+                                        مذکر
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input asp-for="@Model.gender" class="form-check-input" type="radio" value="0">
+                                    <label class="form-check-label">
+                                        مونث
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">وضعیت تاهل</label>
+                            <div class="col-lg-9">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" asp-for="@Model.isMaried" type="radio" value="1">
+                                    <label class="form-check-label">
+                                        متاهل
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" asp-for="@Model.isMaried" type="radio" value="0" checked="checked">
+                                    <label class="form-check-label">
+                                        مجرد
+                                    </label>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">تصویر</label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.ImageFile" type="file" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">نام کاربری</label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.referred.UserName" type="text" class="form-control">
+                                <span asp-validation-for="@Model.referred.UserName"></span>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">رمز عبور</label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.referred.PassWord" type="text" class="form-control">
+                                <span asp-validation-for="@Model.referred.PassWord"></span>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">شغل</label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.referred.Job" type="text" class="form-control">
+                                <span asp-validation-for="@Model.referred.Job"></span>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">توضیحات</label>
+                            <div class="col-lg-9">
+                                <textarea rows="4" cols="5" asp-for="@Model.referred.Description" type="text" class="form-control"></textarea>
+                                <span asp-validation-for="@Model.referred.Description"></span>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">نحوه آشنایی</label>
+                            <select class="col-lg-9" asp-for="@Model.referred.IntroductionMethodId">
+                                @foreach (var obj in Model.IntroductionMethods)
+                                {
+                                    <option value="@obj.Id">@obj.Title</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">استان</label>
+                            <select class="col-lg-9" asp-for="@Model.referred.StateId">
+                                @foreach (var obj in Model.States)
+                                {
+                                    <option value="@obj.Id">@obj.Title</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <div class="text-end ">
+                <button type="submit" class="btn btn-primary">ایجاد</button>
+                <a type="button" asp-action="index" class="btn btn-secondary">انصراف</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="~/assets/js/jquery-3.6.0.min.js"></script>
+<script src="~/js/persian-date.js"></script>
+<script src="~/js/persian-datepicker.js"></script>
+<script src="~/js/persian-datepicker.min.js"></script>
+<script>
+    $('.date').persianDatepicker({
+        initialValueType: 'gregorian',
+        // observer: true,
+        format: 'YYYY/MM/DD',
+        //altField: '.observer-example-alt',
+    });
+</script>
+
+

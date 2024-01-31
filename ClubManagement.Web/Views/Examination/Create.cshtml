@@ -1,0 +1,148 @@
+﻿@model ExaminationVM
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">معاینه</h4>
+    </div>
+    <div class="card-body">
+
+        <form method="post" enctype="multipart/form-data">
+            <input asp-for="@Model.AnomaliesSelected" hidden />
+            <div class="card-body">
+                <div class="row">
+                    <h4 class="card-title"> ثبت معاینه </h4>
+                    <div class="col-xl-6">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">شماره ویزیت </label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.Examinations.VisitNumber" type="text" class="form-control">
+                                <span asp-validation-for="@Model.Examinations.VisitNumber"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">مراجعه کننده</label>
+                            <select class="col-lg-9" asp-for="@Model.Examinations.ReferredId">
+                                @foreach (var obj in Model.Referreds)
+                                {
+                                    <option value="@obj.Id">@string.Join(" ", [obj.Name, obj.Family, obj.NationalCode])</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">معاینه کننده</label>
+                            <select class="col-lg-9" asp-for="@Model.Examinations.ExportId">
+                                @foreach (var obj in Model.Users)
+                                {
+                                    <option value="@obj.Id">@string.Join(" ", [obj.Name, obj.Family, obj.NationalCode])</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">قد </label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.Height" type="text" class="form-control">
+                                <span asp-validation-for="@Model.Height"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">وزن</label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.Weight" type="text" class="form-control">
+                                <span asp-validation-for="@Model.Weight"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label"> شعبه</label>
+                            <select class="col-lg-9" asp-for="@Model.Examinations.BranchId">
+                                @foreach (var obj in Model.Branches)
+                                {
+                                    <option value="@obj.Id">@obj.Name</option>
+                                }
+                            </select>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">تیپ بدنی</label>
+                            <select class="col-lg-9" asp-for="@Model.Examinations.BodyTypeId">
+                                @foreach (var obj in Model.BodyTypes)
+                                {
+                                    <option value="@obj.Id">@obj.Title</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">فایل پیوست</label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.AttachFile" type="file" class="form-control">
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-xl-6">
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">بهبود نسبت به معاینه قبل</label>
+                            <div class="col-lg-9">
+                                <textarea rows="8" asp-for="@Model.Examinations.RecoveryRate" cols="5" type="text" class="form-control"></textarea>
+                                <span asp-validation-for="@Model.Examinations.RecoveryRate"></span>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">توضیحات</label>
+                            <div class="col-lg-9">
+                                <textarea asp-for="@Model.Examinations.Description" rows="8" cols="5" type="text" class="form-control"></textarea>
+                                <span asp-validation-for="@Model.Examinations.Description"></span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+
+                        @foreach (var item in @Model.Anomalies)
+                        {
+                            <div class="checkbox col-2">
+
+                                <label>
+                                    <input value='@item.Id' type='checkbox' class='ChekRow' />@item.Titile
+                                </label>
+
+                            </div>
+
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+
+            <br />
+            <div class="text-end ">
+                <button type="submit" class="btn btn-primary">ثبت</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+<script src="~/assets/js/jquery-3.6.0.min.js"></script>
+<script src="~/js/persian-date.js"></script>
+<script src="~/js/persian-datepicker.js"></script>
+<script src="~/js/persian-datepicker.min.js"></script>
+<script>
+    $('.ChekRow').click(function () {
+        var selected = [];
+        $('.ChekRow:checkbox:checked').each(function () {
+            selected.push($(this).attr('value'));
+        });
+        var checkboxvalue = "";
+        for (var i = 0; i < selected.length; i++) {
+            checkboxvalue += selected[i] + ",";
+        }
+
+        $('#AnomaliesSelected').val(checkboxvalue);
+    });
+
+</script>
+

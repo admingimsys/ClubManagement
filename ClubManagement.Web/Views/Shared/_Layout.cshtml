@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>منتورینگ - قالب آموزش مجازی - داشبورد</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ClubManagement.Web.styles.css" asp-append-version="true" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+    <link rel="stylesheet" href="~/assets/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="~/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/assets/css/feathericon.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link href="~/css/persian-datepicker.css" rel="stylesheet" />
+    <link href="~/css/persiandatepicker.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+
+        <!-- Header -->
+        <div class="header border-1">
+
+            <!-- Logo -->
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <img src="assets/img/logo.png" alt="Logo">
+                </a>
+                <a href="index.html" class="logo logo-small">
+                    <img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
+                </a>
+            </div>
+            <!-- /Logo -->
+
+            <a href="javascript:void(0);" id="toggle_btn">
+                <i class="fe fe-text-align-left"></i>
+            </a>
+
+            <div class="top-nav-search">
+                <form>
+                    <input type="text" class="form-control" placeholder="جستجو کنید">
+                    <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <a class="mobile_btn" id="mobile_btn">
+                <i class="fa fa-bars"></i>
+            </a>
+            <!-- /Mobile Menu Toggle -->
+
+
+        </div>
+        <!-- /Header -->
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li class="menu-title">
+                            <a asp-controller="Home" asp-action="Index"><i class="fe fe-home"></i> صفحات اصلی</a>
+                        </li>
+                   
+                        <li class="submenu">
+                            <a href="#"><span class="text-primary">مراجعه کننده </span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a asp-controller="Referred" asp-action="Index">لیست مراجعه کنندگان</a></li>
+                                <li><a asp-controller="Referred" asp-action="Create">ثبت مراجعه کننده جدید</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><span class="text-primary">معاینه </span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a asp-controller="Examination" asp-action="Index">لیست معاینه ها</a></li>
+                                <li><a asp-controller="Examination" asp-action="Create">ثبت معاینه جدید</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><span class="text-primary">برنامه اصلاحی </span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a asp-controller="CorrectionalProgram" asp-action="Index">لیست برنامه ی اصلاحی</a></li>
+                                <li><a asp-controller="CorrectionalProgram" asp-action="Create">ثبت برنامه اصلاحی جدید</a></li>
+                            </ul>
+                        </li>
+                       @*  <li>
+                            <a href="mentor.html"><span>مدرس</span></a>
+                        </li>
+                        <li>
+                            <a href="mentee.html"><span>دانش آموز</span></a>
+                        </li>
+                        <li>
+                            <a href="booking-list.html"><span>لیست سفارشات</span></a>
+                        </li>
+                        <li>
+                            <a href="categories.html"><span>دسته ها</span></a>
+                        </li>
+                        <li>
+                            <a href="transactions-list.html"><span>تراکنش ها</span></a>
+                        </li>
+                        <li>
+                            <a href="settings.html"><span>تنظیمات</span></a>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><span>گزارشات </span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="invoices.html">فاکتورها لیست</a></li>
+                                <li><a href="invoice-grid.html">فاکتورها جدولی</a></li>
+                                <li><a href="add-invoice.html">اضافه کردن فاکتور</a></li>
+                                <li><a href="edit-invoice.html">ویرایش فاکتور</a></li>
+                                <li><a href="view-invoice.html">جزئیات فاکتور</a></li>
+                                <li><a href="invoices-settings.html">تنظیمات فاکتور</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="invoice-items.html"><span>آیتم ها</span></a>
+                        </li>
+                        <li class="menu-title">
+                            <span><i class="fe fe-document"></i> صفحات داخلی</span>
+                        </li>
+                        <li>
+                            <a href="profile.html"><span>پروفایل من</span></a>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><span>وبلاگ</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="blog.html"> وبلاگ </a></li>
+                                <li><a href="blog-details.html"> جزئیات وبلاگ </a></li>
+                                <li><a href="add-blog.html"> افزودن وبلاگ </a></li>
+                                <li><a href="edit-blog.html"> ویرایش وبلاگ </a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><span> احراز هویت </span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="login.html">ورود</a></li>
+                                <li><a href="register.html">ثبت نام</a></li>
+                                <li><a href="forgot-password.html">فراموشی رمز عبور</a></li>
+                                <li><a href="lock-screen.html">لاک اسکرین</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><span> صفحات ارور </span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="error-404.html">خطای 404 </a></li>
+                                <li><a href="error-500.html">خطای 500 </a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="blank-page.html"><span>صفحه خالی</span></a>
+                        </li>
+                        <li class="menu-title">
+                            <span><i class="fe fe-star-o"></i> رابط کاربری</span>
+                        </li>
+                        <li>
+                            <a href="components.html"><span>عناصر</span></a>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><span> فرم ها </span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="form-basic-inputs.html">ورودی های ساده</a></li>
+                                <li><a href="form-input-groups.html">ورودی های گروهی</a></li>
+                                <li><a href="form-horizontal.html">فرم افقی</a></li>
+                                <li><a href="form-vertical.html">فرم عمودی</a></li>
+                                <li><a href="form-mask.html">فرم های اجباری</a></li>
+                                <li><a href="form-validation.html">اعتبار سنجی فرم</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><span>جداول</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="tables-basic.html">جداول ساده</a></li>
+                                <li><a href="data-tables.html">جداول داده</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><span>چند سطحی</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li class="submenu">
+                                    <a href="javascript:void(0);"> <span>سطح 1</span> <span class="menu-arrow"></span></a>
+                                    <ul style="display: none;">
+                                        <li><a href="javascript:void(0);"><span>سطح 2</span></a></li>
+                                        <li class="submenu">
+                                            <a href="javascript:void(0);"> <span> سطح 2</span> <span class="menu-arrow"></span></a>
+                                            <ul style="display: none;">
+                                                <li><a href="javascript:void(0);">سطح 3</a></li>
+                                                <li><a href="javascript:void(0);">سطح 3</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="javascript:void(0);"> <span>سطح 2</span></a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);"> <span>سطح 1</span></a>
+                                </li>
+                            </ul>
+                        </li> *@
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /Sidebar -->
+        <!-- Page Wrapper -->
+        <div class="page-wrapper">
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </div>
+        <!-- /Page Wrapper -->
+
+    </div>
+
+
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+    <script src="~/assets/js/jquery-3.6.0.min.js"></script>
+    <script src="~/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/feather.min.js"></script>
+    <script src="~/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/assets/plugins/select2/js/select2.min.js"></script>
+    <script src="~/assets/js/script.js"></script>
+
+    <script src="~/js/persian-date.js"></script>
+    <script src="~/js/persian-datepicker.js"></script>
+    <script src="~/js/persian-datepicker.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

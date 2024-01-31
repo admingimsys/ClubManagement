@@ -1,0 +1,90 @@
+﻿@model CorrectionalProgramDetailVM
+
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">برنامه اصلاحی </h4>
+    </div>
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            <input asp-for="@Model.ExaminationId" hidden />
+            <div class="card-body">
+                <div class="row">
+                    <h4 class="card-title">ثبت برنامه  </h4>
+                    <div class="col-xl-6">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">ناهنجاری مراجع</label>
+                            <select class="col-lg-9" asp-for="@Model.CurrectionalProgramDetail.ExaminationAnomalieId">
+                                @foreach (var obj in Model.ExaminationAnomalies)
+                                {
+                                    <option value="@obj.Id">@obj.Titile</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">حرکت اصلاحی</label>
+                            <select class="col-lg-9" asp-for="@Model.CurrectionalProgramDetail.CorrectiveActionId">
+                                @foreach (var obj in Model.CorrectiveActions)
+                                {
+                                    <option value="@obj.Id">@obj.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label"> تعداد ست </label>
+                             <div class="col-lg-9">
+                                <input asp-for="@Model.CurrectionalProgramDetail.SetCount" type="text" class="form-control">
+                                <span asp-validation-for="@Model.CurrectionalProgramDetail.SetCount"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label"> واحد</label>
+                            <select class="col-lg-9" asp-for="@Model.CurrectionalProgramDetail.UnitId">
+                                @foreach (var obj in Model.Units)
+                                {
+                                    <option value="@obj.Id">@obj.Title</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label"> میزان دفعات </label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.CurrectionalProgramDetail.SetValue" type="text" class="form-control">
+                                <span asp-validation-for="@Model.CurrectionalProgramDetail.SetValue"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-xl-12">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">توضیحات</label>
+                            <div class="col-lg-9">
+                                <textarea rows="4" cols="5" asp-for="@Model.CurrectionalProgramDetail.Description" type="text" class="form-control"></textarea>
+                                <span asp-validation-for="@Model.CurrectionalProgramDetail.Description"></span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <div class="text-end ">
+                <button type="submit" class="btn btn-primary">ثبت</button>
+                <a type="button" asp-action="index" class="btn btn-secondary">انصراف</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="~/assets/js/jquery-3.6.0.min.js"></script>
+<script src="~/js/persian-date.js"></script>
+<script src="~/js/persian-datepicker.js"></script>
+<script src="~/js/persian-datepicker.min.js"></script>
+
+
+

@@ -1,0 +1,135 @@
+﻿@model HealthInfoVM
+
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">اطلاعات سلامت </h4>
+    </div>
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            <input asp-for="@Model.healthInfo.Id" hidden/>
+            <input asp-for="@Model.healthInfo.ReferredId" hidden />
+            <div class="card-body">
+                <div class="row">
+                    <h4 class="card-title">اطلاعات سلامت مراجع </h4>
+                    <div class="col-xl-6">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">قد </label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.healthInfo.Height" type="text" class="form-control" placeholder="سانتی متر">
+                                <span asp-validation-for="@Model.healthInfo.Height"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label"> وزن</label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.healthInfo.Weight" type="text" class="form-control" placeholder="کیلوگرم ">
+                                <span asp-validation-for="@Model.healthInfo.Weight"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">کمترین وزن </label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.healthInfo.LowestWeight" type="text" class="form-control">
+                                <span asp-validation-for="@Model.healthInfo.LowestWeight"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label"> بیشترین وزن</label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.healthInfo.HighestWeight" type="number" class="form-control">
+                                <span asp-validation-for="@Model.healthInfo.HighestWeight"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">فایل پیوست(پرونده پزشکی)</label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.File" type="file" class="form-control">
+                                <span asp-validation-for="@Model.File"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">ساعات خواب </label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.healthInfo.SleepingTime" type="text" class="form-control">
+                                <span asp-validation-for="@Model.healthInfo.SleepingTime"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">میزان اشتها </label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.healthInfo.Appetite" type="text" class="form-control">
+                                <span asp-validation-for="@Model.healthInfo.Appetite"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label"> میزان فعالیت بدنی </label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.healthInfo.physicalActivityAmount" type="text" class="form-control">
+                                <span asp-validation-for="@Model.healthInfo.physicalActivityAmount"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">بیماری زمینه ای </label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.healthInfo.DiseaseBackgrand" type="text" class="form-control">
+                                <span asp-validation-for="@Model.healthInfo.DiseaseBackgrand"></span>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">داروهای مصرفی </label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.healthInfo.DrugUsed" type="text" class="form-control">
+                                <span asp-validation-for="@Model.healthInfo.DrugUsed"></span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="HadSurgery" asp-for="@Model.hadSurgery"> آیا سابقه جراحی داشته اید؟
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="HasMetallInBody" asp-for="@Model.HasMetallInBody">وجود صفحات فلزی د بدن ؟
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="HasPreviousDiet" asp-for="@Model.HasPreviousDiet">آیا سابقه رژیم غذایی داشته اید؟
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <div class="text-end ">
+                <button type="submit" class="btn btn-primary">ذخیره</button>
+                <a type="button" asp-action="index" class="btn btn-secondary">انصراف</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="~/js/persian-date.js"></script>
+<script src="~/js/persian-datepicker.js"></script>
+<script src="~/js/persian-datepicker.min.js"></script>
+<script>
+    $('.date').persianDatepicker({
+        initialValueType: 'gregorian',
+        // observer: true,
+        format: 'YYYY/MM/DD',
+        //altField: '.observer-example-alt',
+    });
+</script>
+
+

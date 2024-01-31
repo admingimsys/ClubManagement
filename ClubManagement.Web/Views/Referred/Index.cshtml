@@ -1,0 +1,90 @@
+﻿@using ClubManagement.Domain.Entities
+@model List<Referred>
+
+
+
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="page-title">لیست مراجعان</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">داشبورد</a></li>
+                    <li class="breadcrumb-item active">مراجعان</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="datatable table table-hover table-center mb-0 text-center">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col"> تصویر  </th>
+                                    <th scope="col">نام و نام خانوادگی</th>
+                                    <th scope="col">کد عضویت </th>
+                                    <th scope="col">موبایل  </th>
+                                    <th scope="col">جنسیت </th>
+                                    <th scope="col">وضعیت تاهل  </th>
+                                    <th scope="col"> کد ملی  </th>
+                                    <th scope="col"> عملیات</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Count() > 0)
+                                {
+                                    @for (int i = 0; i < Model.Count(); i++)
+                                    {
+                                        <tr>
+                                            <td>@(i + 1)</td>
+                                            <td>تصویر شخص</td>
+                                            <td>@string.Concat(Model[i].Name, " ", Model[i].Family)</td>
+                                            <td>@Model[i].Code</td>
+                                            <td>@Model[i].Mobile</td>
+                                            @if (Model[i].Gender == true)
+                                            {
+                                                <td>مرد</td>
+                                            }
+                                            else
+                                            {
+                                                <td>زن</td>
+                                            }
+                                            @if (Model[i].IsMarid == true)
+                                            {
+                                                <td>متاهل</td>
+                                            }
+                                            else
+                                            {
+                                                <td>مجرد</td>
+                                            }
+                                            <td>@Model[i].NationalCode</td>
+                                            <td>
+                                                <a asp-controller="Referred" asp-action="Delete" asp-route-referredid="@Model[i].Id" class="btn btn-danger mx-2">حذف</a>
+                                                <a asp-controller="Referred" asp-action="Update" asp-route-referredid="@Model[i].Id" class="btn btn-warning mx-2">ویرایش</a>
+                                                <a asp-controller="Referred" asp-action="HealthInfo" asp-route-referredid="@Model[i].Id" class=" btn btn-success mx-2">اطلاعات سلامت</a>
+                                                <a asp-controller="Referred" asp-action="PersonalInfo" asp-route-referredid="@Model[i].Id" class="btn btn-primary mx-2">اطلاعات تکمیلی</a>
+                                            </td>
+
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- /Page Wrapper -->

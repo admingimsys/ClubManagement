@@ -1,0 +1,73 @@
+﻿@model PersonalInfo
+
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">اطلاعات تکمیلی</h4>
+    </div>
+    <div class="card-body">
+
+        <form method="post" enctype="multipart/form-data">
+            <input asp-for="Id" hidden/>
+            <input asp-for="ReferredId" hidden/>
+
+            <div class="card-body">
+                <div class="row">
+                    <h4 class="card-title">اطلاعات  تکمیلی </h4>
+                    <div class="col-xl-6">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">تلفن ضروری </label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.EssentialPhone" type="number" class="form-control">
+                                <span asp-validation-for="@Model.EssentialPhone"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">ایمیل </label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.Email" type="email" class="form-control">
+                                <span asp-validation-for="@Model.Email"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label"> کد پستی </label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.PostalCode" type="text" class="form-control">
+                                <span asp-validation-for="@Model.PostalCode"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label"> آدرس </label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.Address" type="text" class="form-control">
+                                <span asp-validation-for="@Model.Address"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <div class="text-end ">
+                <button type="submit" class="btn btn-primary">ذخیره</button>
+                <a type="button" asp-action="index" class="btn btn-secondary">انصراف</a>
+            </div>
+        </form>
+    </div>
+
+
+
+
+
+</div>
+
+<script src="~/js/persian-date.js"></script>
+<script src="~/js/persian-datepicker.js"></script>
+<script src="~/js/persian-datepicker.min.js"></script>
+
+
+

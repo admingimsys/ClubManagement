@@ -1,0 +1,69 @@
+﻿@using ClubManagement.Domain.Entities
+@model List<Referred>
+
+
+
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="page-title">لیست معاینه ها</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">داشبورد</a></li>
+                    <li class="breadcrumb-item active">معاینه ها</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="datatable table table-hover table-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">نام مراجع</th>
+                                    <th scope="col">شماره ویزیت  </th>
+                                    <th scope="col">تاریخ   </th>
+                                    <th scope="col">پزشک </th>
+                                    <th scope="col">شعبه </th>
+                                    <th scope="col"> عملیات</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr>
+                                        <td>@item.Id</td>
+                                        <td>@string.Concat(item.Name, " ", item.Family)</td>
+                                     @*    <td>@item.VisitNumber</td>
+                                        <td>@item.Date</td>
+                                        <td>@item.Refferrdid</td>
+                                        <td>@item.Branch</td> *@
+                                        <td>
+                                            <a asp-controller="Examination" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger mx-2"><i class="fe fe-trash"></i></a>
+                                            <a asp-controller="Examination" asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning mx-2"><i class="fe fe-pencil"></i></a>
+
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- /Page Wrapper -->

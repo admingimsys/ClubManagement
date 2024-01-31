@@ -1,0 +1,29 @@
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ClubManagement.Domain.Entities
+{
+    public class BodyTypeProperty
+    {
+        [Key]
+        public int Id { get; set; }
+
+        [StringLength(50)]
+        [Required(ErrorMessage = "الزامی")]
+        public string Title { get; set; }
+
+        [StringLength(50)]
+        public string? Description { get; set; }
+
+        [ForeignKey("BodyType")]
+        public int BodyTypeId { get; set; }
+        [ValidateNever]
+        public BodyType BodyType { get; set; }
+    }
+}
