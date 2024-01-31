@@ -15,8 +15,13 @@ namespace ClubManagement.Web.Controllers
         }
         public IActionResult Index()
         {
-
-            return View();
+            ExaminationIndexVM vm = new ExaminationIndexVM
+            {
+                Examinations = _context.Examinations.ToList(),
+                Users = _context.Users.ToList(),
+                Branchs = _context.Branches.ToList()
+            };
+            return View(vm);
         }
         public IActionResult Create()
         {
@@ -29,7 +34,7 @@ namespace ClubManagement.Web.Controllers
                     BodyTypes = _context.BodyTypes.ToList(),
                     Referreds = _context.Referreds.ToList(),
                     Branches = _context.Branches.ToList(),
-                    Packages =_context.Packages.ToList(),
+                    Packages = _context.Packages.ToList(),
                 };
                 return View(vm);
             }
@@ -82,7 +87,7 @@ namespace ClubManagement.Web.Controllers
                     return RedirectToAction("Index", "CorrectionalProgram", new { ExaminationId = examinationForSave.Id });
 
                 }
-            //not valid
+                //not valid
 
                 return null;
             }
