@@ -1,0 +1,71 @@
+﻿@using ClubManagement.Domain.Entities
+@* @model List<Referred>
+
+ *@
+
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="page-title">لیست جلسات</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">داشبورد</a></li>
+                    <li class="breadcrumb-item active">جلسات برنامه اصلاحی</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="datatable table table-hover table-center mb-0 text-center">
+                            <thead>
+                                <tr>
+                                    <th scope="col">جلسه</th>
+                                    <th scope="col"> عملیات  </th>
+                                    <th scope="col"> تاریخ </th>
+                                    <th scope="col"> ورود</th>
+                                    <th scope="col"> خروج</th>
+                                    <th scope="col"> تایید مربی</th>
+                                    <th scope="col"> تاریخ تایید </th>
+                                    <th scope="col"> ناظر  </th>
+                                    <th scope="col">  شعبه </th>
+                                    <th scope="col">  عملیات </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <a asp-controller="Referred" class="btn btn-success mx-2">ثبت برنامه</a>
+                                        <a asp-controller="Referred" class="btn btn-primary mx-2">مشاهده</a>
+                                    </td>
+                                    <td>10/102023</td>
+                                    <td>10:30</td>
+                                    <td>12:30</td>
+                                    <td>عدم تایید</td>
+                                    <td>10/10/2023</td>
+                                    <td>  نام ناظر </td>
+                                    <td>  شعبه </td>
+                                    <td>
+                                        <a asp-controller="Referred" class=" btn btn-success mx-2"> حضور </a>
+                                        <a asp-controller="Referred" class="btn btn-primary mx-2"> تایید مربی</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- /Page Wrapper -->

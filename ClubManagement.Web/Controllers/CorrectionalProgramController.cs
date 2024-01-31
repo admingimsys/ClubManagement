@@ -16,12 +16,35 @@ namespace ClubManagement.Web.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int ExaminationId)
         {
-            //view model????
-            //var CorrectionalProgram = _context.CorrectionalPrograms.ToList();
+            try
+            {
+                var packageId = _context.Examinations.Where(u => u.Id == ExaminationId).Select(u => u.PackageId).FirstOrDefault();
+                var SessionGroupId = _context.Packages.Where(u => u.Id == packageId).Select(u => u.Id).FirstOrDefault();
+                var SessionCount = _context.SessionGroups.Where(u => u.Id == SessionGroupId).Select(u => u.Count).FirstOrDefault();
 
-            return View(/*CorrectionalProgram*/);
+                CorrectionalProgramMasterVM vm = new CorrectionalProgramMasterVM
+                {
+                    currectionalProgramMasterList = new List<CurrectionalProgramMaster>()
+                };
+                for (int i = 1; i <= SessionCount; i++)
+                {
+                    var obj = new CurrectionalProgramMaster();
+                    vm.currectionalProgramMasterList.Add(obj);
+                }
+
+                return View();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
+
+            return View();
         }
 
         public IActionResult Create(int examinationId)
