@@ -28,7 +28,8 @@ namespace ClubManagement.Web.Controllers
                     Users = _context.Users.ToList(),
                     BodyTypes = _context.BodyTypes.ToList(),
                     Referreds = _context.Referreds.ToList(),
-                    Branches = _context.Branches.ToList()
+                    Branches = _context.Branches.ToList(),
+                    Packages =_context.Packages.ToList(),
                 };
                 return View(vm);
             }

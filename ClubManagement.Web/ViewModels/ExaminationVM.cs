@@ -11,7 +11,9 @@ namespace ClubManagement.Web.ViewModels
         public List<Branch> Branches { get; set; }
         public List<Anomalie> Anomalies { get; set; }
         public List<Referred> Referreds { get; set; }
+        public List<Package> Packages { get; set; }
         public string? AnomaliesSelected { get; set; }
+        public string? PackageIdSelected { get; set; }
 
         public string Height { get; set; }
         public string Weight { get; set; }

@@ -30,6 +30,15 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label">معاینه کننده</label>
+                            <select class="col-lg-9" asp-for="@Model.PackageIdSelected">
+                                @foreach (var obj in Model.Packages)
+                                {
+                                    <option value="@obj.Id">@obj.Title</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label"> پکیج</label>
                             <select class="col-lg-9" asp-for="@Model.Examinations.ExportId">
                                 @foreach (var obj in Model.Users)
                                 {
