@@ -23,18 +23,26 @@ namespace ClubManagement.Web.Controllers
                 var packageId = _context.Examinations.Where(u => u.Id == ExaminationId).Select(u => u.PackageId).FirstOrDefault();
                 var SessionGroupId = _context.Packages.Where(u => u.Id == packageId).Select(u => u.Id).FirstOrDefault();
                 var SessionCount = _context.SessionGroups.Where(u => u.Id == SessionGroupId).Select(u => u.Count).FirstOrDefault();
+                var sessionList = _context.Sessions.Where(u => u.SessionGroupId == SessionGroupId).ToList();
 
                 CorrectionalProgramMasterVM vm = new CorrectionalProgramMasterVM
                 {
                     currectionalProgramMasterList = new List<CurrectionalProgramMaster>()
                 };
-                for (int i = 1; i <= SessionCount; i++)
+                for (int i = 0; i < SessionCount; i++)
                 {
-                    var obj = new CurrectionalProgramMaster();
+                    var obj = new CurrectionalProgramMaster {
+                        CreateDate=DateTime.Now,
+                        SessionId = sessionList[i].Id,
+                        Session = sessionList[i],
+                        ExaminationId = ExaminationId,
+                    };
+                    _context.CurrectionalProgramMaster.Add(obj);
+                    _context.SaveChanges();
                     vm.currectionalProgramMasterList.Add(obj);
                 }
 
-                return View();
+                return View(vm);
 
             }
             catch (Exception)
@@ -47,9 +55,10 @@ namespace ClubManagement.Web.Controllers
             return View();
         }
 
-        public IActionResult Create(int examinationId)
+        public IActionResult CreateDetail(int masterId)
         {
-            var ExaminationAnomaliesIds = _context.ExaminationAnomalies.Where(u => u.ExaminationId == examinationId).Select(u => u.AnomalieId).ToList();
+            var master = _context.CurrectionalProgramMaster.Where(u => u.Id == masterId).FirstOrDefault();
+            var ExaminationAnomaliesIds = _context.ExaminationAnomalies.Where(u => u.ExaminationId == master.ExaminationId).Select(u => u.AnomalieId).ToList();
 
             var allAnomalies = _context.ExaminationAnomalies.ToList();
             CorrectionalProgramDetailVM vm = new CorrectionalProgramDetailVM()
@@ -57,7 +66,8 @@ namespace ClubManagement.Web.Controllers
                 CurrectionalProgramMasters = _context.CurrectionalProgramMaster.ToList(),
                 CorrectiveActions = _context.CorrectiveActions.ToList(),
                 ExaminationAnomalies = new List<Anomalie>(),
-                ExaminationId = _context.Examinations.Where(u => u.Id == examinationId).Select(u=>u.Id).FirstOrDefault(),
+                //ExaminationId = _context.Examinations.Where(u => u.Id == master.ExaminationId).Select(u=>u.Id).FirstOrDefault(),
+                masterId=masterId,
                 Sessions = _context.Sessions.ToList(),
                 Units = _context.Units.Where(u => u.IsAction == true).ToList()
             };
@@ -80,15 +90,12 @@ namespace ClubManagement.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    CurrectionalProgramMaster correctionalProgramMasterForSave = new CurrectionalProgramMaster { 
-                    CreateDate= DateTime.Now,
-                    ExaminationId =vm.ExaminationId
-                    };
-                    _context.CurrectionalProgramMaster.Add(correctionalProgramMasterForSave);
+    
+                   
 
                     CurrectionalProgramDetail currectionalProgramDetailForSave = vm.CurrectionalProgramDetail;
                     currectionalProgramDetailForSave.CreateDate = DateTime.Now;
-                    currectionalProgramDetailForSave.CurrectionalProgramMasterId = correctionalProgramMasterForSave.Id;
+                    currectionalProgramDetailForSave.CurrectionalProgramMasterId = vm.masterId;
                     _context.CurrectionalProgramDetail.Add(currectionalProgramDetailForSave);
 
                     _context.SaveChanges();

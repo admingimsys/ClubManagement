@@ -1,7 +1,5 @@
 ﻿@using ClubManagement.Domain.Entities
-@* @model List<Referred>
-
- *@
+@model CorrectionalProgramMasterVM
 
 <div class="content container-fluid">
 
@@ -40,24 +38,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>
-                                        <a asp-controller="Referred" class="btn btn-success mx-2">ثبت برنامه</a>
-                                        <a asp-controller="Referred" class="btn btn-primary mx-2">مشاهده</a>
-                                    </td>
-                                    <td>10/102023</td>
-                                    <td>10:30</td>
-                                    <td>12:30</td>
-                                    <td>عدم تایید</td>
-                                    <td>10/10/2023</td>
-                                    <td>  نام ناظر </td>
-                                    <td>  شعبه </td>
-                                    <td>
-                                        <a asp-controller="Referred" class=" btn btn-success mx-2"> حضور </a>
-                                        <a asp-controller="Referred" class="btn btn-primary mx-2"> تایید مربی</a>
-                                    </td>
-                                </tr>
+                                @foreach (var CorrectionalProgramMaster in Model.currectionalProgramMasterList)
+                                {
+                                    <tr>
+                                        <td>@CorrectionalProgramMaster.Session.Title</td>
+                                        <td>
+                                            <a asp-controller="CorrectionalProgram" asp-action="CreateDetail" asp-route-masterId="@CorrectionalProgramMaster.Id" class="btn btn-success mx-2">ثبت برنامه</a>
+                                            <a asp-controller="CorrectionalProgram" asp-action="Show" asp-route-masterId="@CorrectionalProgramMaster.Id" class="btn btn-primary mx-2">مشاهده</a>
+                                        </td>
+
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>عدم تایید</td>
+                                        <td></td>
+                                        <td>  نام ناظر </td>
+                                        <td>  شعبه </td>
+                                        <td>
+                                            <a asp-controller="Referred" class=" btn btn-success mx-2"> حضور </a>
+                                            <a asp-controller="Referred" class="btn btn-primary mx-2"> تایید مربی</a>
+                                        </td>
+                                    </tr>
+                                }    
+                               
                             </tbody>
                         </table>
                     </div>

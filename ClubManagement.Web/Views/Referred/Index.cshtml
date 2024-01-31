@@ -9,21 +9,30 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-12">
-                <h3 class="page-title">لیست مراجعان</h3>
+                <h3 class="page-title">لیست مشتریان</h3>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">داشبورد</a></li>
-                    <li class="breadcrumb-item active">مراجعان</li>
+                    <li class="breadcrumb-item active">مشتریان</li>
                 </ul>
+
             </div>
         </div>
     </div>
     <!-- /Page Header -->
 
     <div class="row">
+
         <div class="col-sm-12">
+
             <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title pull-right">لیست مشتریان</h4>
+                    <a class="btn btn-xs bg-primary-light pull-left" asp-controller="Referred" asp-action="Create">ثبت مراجعه کننده جدید</a>
+                </div>
+
                 <div class="card-body">
                     <div class="table-responsive">
+
                         <table class="datatable table table-hover table-center mb-0 text-center">
                             <thead>
                                 <tr>
@@ -68,10 +77,12 @@
                                             }
                                             <td>@Model[i].NationalCode</td>
                                             <td>
-                                                <a asp-controller="Referred" asp-action="Delete" asp-route-referredid="@Model[i].Id" class="btn btn-danger mx-2">حذف</a>
-                                                <a asp-controller="Referred" asp-action="Update" asp-route-referredid="@Model[i].Id" class="btn btn-warning mx-2">ویرایش</a>
-                                                <a asp-controller="Referred" asp-action="HealthInfo" asp-route-referredid="@Model[i].Id" class=" btn btn-success mx-2">اطلاعات سلامت</a>
-                                                <a asp-controller="Referred" asp-action="PersonalInfo" asp-route-referredid="@Model[i].Id" class="btn btn-primary mx-2">اطلاعات تکمیلی</a>
+                                                <a asp-controller="Referred" asp-action="HealthInfo" asp-route-referredid="@Model[i].Id" class=" btn bg-success-light mx-2">اطلاعات سلامت</a>
+                                                <a asp-controller="Referred" asp-action="PersonalInfo" asp-route-referredid="@Model[i].Id" class="btn bg-primary-light mx-2">اطلاعات تکمیلی</a>
+                                                <a asp-controller="Referred" asp-action="Update" asp-route-referredid="@Model[i].Id" class="btn bg-warning-light mx-2"><i class="fe fe-pencil"></i></a>
+                                                <a asp-controller="Referred" asp-action="Delete" asp-route-referredid="@Model[i].Id" class="btn bg-danger-light mx-2"><i class="fe fe-trash"></i></a>
+                                                <a asp-controller="Referred" asp-action="" asp-route-referredid="@Model[i].Id" class="btn bg-primary-light mx-2"><i class="fe fe-user"></i></a>
+                                                <a asp-controller="Examination" asp-action="Create" class="btn bg-info-light mx-2"><i class="fe fe-plus">معاینه</i></a>
                                             </td>
 
                                         </tr>

@@ -25,9 +25,8 @@ namespace ClubManagement.Domain.Entities
         [StringLength(50)]
         public decimal? Weight { get; set; }
 
-        [Required(ErrorMessage = "الزامی")]
         [StringLength(100)]
-        public string RecoveryRate { get; set; }
+        public string? RecoveryRate { get; set; }
 
         [StringLength(500)]
         public string? Description { get; set; }

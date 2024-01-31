@@ -1,4 +1,5 @@
 ﻿using ClubManagement.Domain.Entities;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace ClubManagement.Web.ViewModels
 {
@@ -8,11 +9,14 @@ namespace ClubManagement.Web.ViewModels
         
         public List<CorrectiveAction>? CorrectiveActions { get; set; }
         public List<Anomalie>? ExaminationAnomalies { get; set; }
+        [ValidateNever]
         public List<Session> Sessions { get; set; }
+        [ValidateNever]
+
         public List<Unit> Units { get; set; }
 
         public CurrectionalProgramDetail CurrectionalProgramDetail { get; set; }
-        public int ExaminationId { get; set; }
+        public int masterId { get; set; }
 
 
 

@@ -45,39 +45,46 @@ namespace ClubManagement.Web.Controllers
         {
             try
             {
-                Examination examinationForSave = vm.Examinations;
-                examinationForSave.Height = decimal.Parse(vm.Height);
-                examinationForSave.Weight = decimal.Parse(vm.Weight);
-                examinationForSave.CreateDate = DateTime.Now;
-                examinationForSave.Date = DateOnly.FromDateTime(DateTime.Now);
-                examinationForSave.Hour = TimeOnly.FromDateTime(DateTime.Now);
-                if (vm.AttachFile != null)
+                if (ModelState.IsValid)
                 {
-                    //save File 
-                }
-                _context.Examinations.Add(examinationForSave);
-
-                _context.SaveChanges();
-                if (!string.IsNullOrEmpty(vm.AnomaliesSelected))
-                {
-                    List<string> anomaliesSelectedList = vm.AnomaliesSelected.Split("," , StringSplitOptions.RemoveEmptyEntries).ToList();
-                    foreach (var anomaliesSelected in anomaliesSelectedList)
+                    Examination examinationForSave = vm.Examinations;
+                    examinationForSave.Height = decimal.Parse(vm.Height);
+                    examinationForSave.Weight = decimal.Parse(vm.Weight);
+                    examinationForSave.CreateDate = DateTime.Now;
+                    examinationForSave.Date = DateOnly.FromDateTime(DateTime.Now);
+                    examinationForSave.Hour = TimeOnly.FromDateTime(DateTime.Now);
+                    if (vm.AttachFile != null)
                     {
-                        ExaminationAnomalie examinationAnomalieForSave = new ExaminationAnomalie
-                        {
-                            CreateDate = DateTime.Now,
-                            AnomalieId =int.Parse( anomaliesSelected),
-                            ExaminationId = examinationForSave.Id,
-                        };
-                        _context.ExaminationAnomalies.Add(examinationAnomalieForSave);
-                       
+                        //save File 
                     }
+                    _context.Examinations.Add(examinationForSave);
+
                     _context.SaveChanges();
+                    if (!string.IsNullOrEmpty(vm.AnomaliesSelected))
+                    {
+                        List<string> anomaliesSelectedList = vm.AnomaliesSelected.Split(",", StringSplitOptions.RemoveEmptyEntries).ToList();
+                        foreach (var anomaliesSelected in anomaliesSelectedList)
+                        {
+                            ExaminationAnomalie examinationAnomalieForSave = new ExaminationAnomalie
+                            {
+                                CreateDate = DateTime.Now,
+                                AnomalieId = int.Parse(anomaliesSelected),
+                                ExaminationId = examinationForSave.Id,
+                            };
+                            _context.ExaminationAnomalies.Add(examinationAnomalieForSave);
+
+                        }
+                        _context.SaveChanges();
+                    }
+
+
+
+                    return RedirectToAction("Index", "CorrectionalProgram", new { ExaminationId = examinationForSave.Id });
+
                 }
-                
+            //not valid
 
-
-                return RedirectToAction("Create", "CorrectionalProgram", new { examinationId= examinationForSave.Id });
+                return null;
             }
             catch (Exception ex)
             {
@@ -85,6 +92,8 @@ namespace ClubManagement.Web.Controllers
                 vm.Users = _context.Users.ToList();
                 vm.BodyTypes = _context.BodyTypes.ToList();
                 vm.Referreds = _context.Referreds.ToList();
+                vm.Packages = _context.Packages.ToList();
+
                 return View(vm);
             }
 

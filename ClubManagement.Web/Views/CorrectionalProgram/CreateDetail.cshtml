@@ -7,7 +7,7 @@
     </div>
     <div class="card-body">
         <form method="post" enctype="multipart/form-data">
-            <input asp-for="@Model.ExaminationId" hidden />
+            <input asp-for="@Model.masterId" hidden />
             <div class="card-body">
                 <div class="row">
                     <h4 class="card-title">ثبت برنامه  </h4>
@@ -74,7 +74,7 @@
 
             <br />
             <div class="text-end ">
-                <button type="submit" class="btn btn-primary">ثبت</button>
+                <button type="submit" asp-action="Create" class="btn btn-primary">ثبت</button>
                 <a type="button" asp-action="index" class="btn btn-secondary">انصراف</a>
             </div>
         </form>
