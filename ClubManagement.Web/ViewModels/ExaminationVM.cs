@@ -29,8 +29,8 @@ namespace ClubManagement.Web.ViewModels
         public string? AnomaliesSelected { get; set; }
         public string? PackageIdSelected { get; set; }
 
-        public string Height { get; set; }
-        public string Weight { get; set; }
+        public string? Height { get; set; } = "0";
+        public string? Weight { get; set; }="0";
 
     }
 }

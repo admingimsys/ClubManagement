@@ -15,8 +15,7 @@ namespace ClubManagement.Web.Controllers
         {
             _context = context;
         }
-
-        public IActionResult Index(int ExaminationId)
+        public IActionResult CreateMaster(int ExaminationId)
         {
             try
             {
@@ -31,8 +30,9 @@ namespace ClubManagement.Web.Controllers
                 };
                 for (int i = 0; i < SessionCount; i++)
                 {
-                    var obj = new CurrectionalProgramMaster {
-                        CreateDate=DateTime.Now,
+                    var obj = new CurrectionalProgramMaster
+                    {
+                        CreateDate = DateTime.Now,
                         SessionId = sessionList[i].Id,
                         Session = sessionList[i],
                         ExaminationId = ExaminationId,
@@ -41,48 +41,52 @@ namespace ClubManagement.Web.Controllers
                     _context.SaveChanges();
                     vm.currectionalProgramMasterList.Add(obj);
                 }
-
                 return View(vm);
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                TempData["error"] = "خطای سرور";
+                Console.WriteLine(ex);
+                return RedirectToAction("Index", "CorrectionalProgramController");
             }
-           
-
-            return View();
         }
 
         public IActionResult CreateDetail(int masterId)
         {
-            var master = _context.CurrectionalProgramMaster.Where(u => u.Id == masterId).FirstOrDefault();
-            var ExaminationAnomaliesIds = _context.ExaminationAnomalies.Where(u => u.ExaminationId == master.ExaminationId).Select(u => u.AnomalieId).ToList();
+            try
+            {
+                var master = _context.CurrectionalProgramMaster.Where(u => u.Id == masterId).FirstOrDefault();
+                var ExaminationAnomaliesIds = _context.ExaminationAnomalies.Where(u => u.ExaminationId == master.ExaminationId).Select(u => u.AnomalieId).ToList();
 
-            var allAnomalies = _context.ExaminationAnomalies.ToList();
-            CorrectionalProgramDetailVM vm = new CorrectionalProgramDetailVM()
-            {
-                CurrectionalProgramMasters = _context.CurrectionalProgramMaster.ToList(),
-                CorrectiveActions = _context.CorrectiveActions.ToList(),
-                ExaminationAnomalies = new List<Anomalie>(),
-                //ExaminationId = _context.Examinations.Where(u => u.Id == master.ExaminationId).Select(u=>u.Id).FirstOrDefault(),
-                masterId=masterId,
-                Sessions = _context.Sessions.ToList(),
-                Units = _context.Units.Where(u => u.IsAction == true).ToList()
-            };
-            foreach (var item in ExaminationAnomaliesIds)
-            {
-                var res = _context.Anomalies.Where(u => u.Id == item).FirstOrDefault();
-                vm.ExaminationAnomalies.Add(res);
+                var allAnomalies = _context.ExaminationAnomalies.ToList();
+                CorrectionalProgramDetailVM vm = new CorrectionalProgramDetailVM()
+                {
+                    CurrectionalProgramMasters = _context.CurrectionalProgramMaster.ToList(),
+                    CorrectiveActions = _context.CorrectiveActions.ToList(),
+                    ExaminationAnomalies = new List<Anomalie>(),
+                    //ExaminationId = _context.Examinations.Where(u => u.Id == master.ExaminationId).Select(u=>u.Id).FirstOrDefault(),
+                    masterId = masterId,
+                    Sessions = _context.Sessions.ToList(),
+                    Units = _context.Units.Where(u => u.IsAction == true).ToList()
+                };
+                foreach (var item in ExaminationAnomaliesIds)
+                {
+                    var res = _context.Anomalies.Where(u => u.Id == item).FirstOrDefault();
+                    vm.ExaminationAnomalies.Add(res);
+                }
+                return View(vm);
             }
-
-            return View(vm);
+            catch (Exception ex)
+            {
+                TempData["error"] = "خطای سرور";
+                Console.WriteLine(ex);
+                return RedirectToAction("Index", "CorrectionalProgramController");
+            } 
         }
 
 
         [HttpPost]
-        public IActionResult Create(CorrectionalProgramDetailVM vm)
+        public IActionResult CreateDetail(CorrectionalProgramDetailVM vm)
         {
 
 
@@ -90,8 +94,8 @@ namespace ClubManagement.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-    
-                   
+
+
 
                     CurrectionalProgramDetail currectionalProgramDetailForSave = vm.CurrectionalProgramDetail;
                     currectionalProgramDetailForSave.CreateDate = DateTime.Now;

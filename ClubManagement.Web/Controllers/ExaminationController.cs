@@ -16,11 +16,19 @@ namespace ClubManagement.Web.Controllers
         }
         public IActionResult Index()
         {
-
-            List<Examination> Examinations = _context.Examinations.Include("Referred").Include("User").Include("Package").Include("Branch").ToList();
-          
-            return View(Examinations);
+            try
+            {
+                List<Examination> Examinations = _context.Examinations.Include("Referred").Include("User").Include("Package").Include("Branch").ToList();
+                return View(Examinations);
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = "خطای سرور";
+                Console.WriteLine(ex);
+                return RedirectToAction("Index", "Home");
+            }
         }
+
         public IActionResult Create()
         {
             try
@@ -36,13 +44,14 @@ namespace ClubManagement.Web.Controllers
                 };
                 return View(vm);
             }
-            catch
+            catch (Exception ex)
             {
+                TempData["error"] = "خطای سرور";
+                Console.WriteLine(ex);
                 return RedirectToAction("Index", "Examination");
-
             }
-
         }
+
         [HttpPost]
         public IActionResult Create(ExaminationVM vm)
         {
@@ -51,8 +60,12 @@ namespace ClubManagement.Web.Controllers
                 if (ModelState.IsValid)
                 {
                     Examination examinationForSave = vm.Examinations;
-                    examinationForSave.Height = decimal.Parse(vm.Height);
-                    examinationForSave.Weight = decimal.Parse(vm.Weight);
+                    decimal res = 0;
+                    if (decimal.TryParse(vm.Height.ToString(), out res) && decimal.TryParse(vm.Height.ToString(), out res))
+                    {
+                        examinationForSave.Height = decimal.Parse(vm.Height);
+                        examinationForSave.Weight = decimal.Parse(vm.Weight);
+                    }
                     examinationForSave.CreateDate = DateTime.Now;
                     examinationForSave.Date = DateOnly.FromDateTime(DateTime.Now);
                     examinationForSave.Hour = TimeOnly.FromDateTime(DateTime.Now);
@@ -61,8 +74,8 @@ namespace ClubManagement.Web.Controllers
                         //save File 
                     }
                     _context.Examinations.Add(examinationForSave);
-
                     _context.SaveChanges();
+
                     if (!string.IsNullOrEmpty(vm.AnomaliesSelected))
                     {
                         List<string> anomaliesSelectedList = vm.AnomaliesSelected.Split(",", StringSplitOptions.RemoveEmptyEntries).ToList();
@@ -79,29 +92,29 @@ namespace ClubManagement.Web.Controllers
                         }
                         _context.SaveChanges();
                     }
-
-
-
-                    return RedirectToAction("Index", "CorrectionalProgram", new { ExaminationId = examinationForSave.Id });
-
+                    TempData["success"] = "ذخیره با موفقیت انجام شد";
+                    return RedirectToAction("Index", "Examination");
                 }
-                //not valid
-
-                return null;
+                else
+                {
+                    vm.Anomalies = _context.Anomalies.ToList();
+                    vm.Users = _context.Users.ToList();
+                    vm.BodyTypes = _context.BodyTypes.ToList();
+                    vm.Referreds = _context.Referreds.ToList();
+                    vm.Branches = _context.Branches.ToList();
+                    vm.Packages = _context.Packages.ToList();
+                    TempData["error"] = "اطلاعات ورودی صحیح نمیباشد";
+                    return View(vm);
+                }
             }
             catch (Exception ex)
             {
-                vm.Anomalies = _context.Anomalies.ToList();
-                vm.Users = _context.Users.ToList();
-                vm.BodyTypes = _context.BodyTypes.ToList();
-                vm.Referreds = _context.Referreds.ToList();
-                vm.Packages = _context.Packages.ToList();
-
-                return View(vm);
+                TempData["error"] = "خطای سرور";
+                Console.WriteLine(ex);
+                return RedirectToAction("Index", "Examination");
             }
-
-
         }
+
         public IActionResult Update()
         {
             return View();

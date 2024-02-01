@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\CorrectionalProgram\CustomerProgram.cshtml" />
+    <Content Remove="Views\CorrectionalProgram\index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -20,6 +25,11 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Images\Refferd\Profile\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\CorrectionalProgram\CustomerProgram.cshtml" />
+    <None Include="Views\CorrectionalProgram\index.cshtml" />
   </ItemGroup>
 
 </Project>

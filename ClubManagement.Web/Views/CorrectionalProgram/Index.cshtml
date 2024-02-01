@@ -1,5 +1,6 @@
-﻿@using ClubManagement.Domain.Entities
-@model CorrectionalProgramMasterVM
+@* @using ClubManagement.Domain.Entities
+@model List<Referred> *@
+
 
 <div class="content container-fluid">
 
@@ -7,10 +8,10 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-12">
-                <h3 class="page-title">لیست جلسات</h3>
+                <h3 class="page-title">لیست برنامه های اصلاحی</h3>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">داشبورد</a></li>
-                    <li class="breadcrumb-item active">جلسات برنامه اصلاحی</li>
+                    <li class="breadcrumb-item active">برنامه ها </li>
                 </ul>
             </div>
         </div>
@@ -25,42 +26,34 @@
                         <table class="datatable table table-hover table-center mb-0 text-center">
                             <thead>
                                 <tr>
-                                    <th scope="col">جلسه</th>
-                                    <th scope="col"> عملیات  </th>
-                                    <th scope="col"> تاریخ </th>
-                                    <th scope="col"> ورود</th>
-                                    <th scope="col"> خروج</th>
-                                    <th scope="col"> تایید مربی</th>
-                                    <th scope="col"> تاریخ تایید </th>
-                                    <th scope="col"> ناظر  </th>
-                                    <th scope="col">  شعبه </th>
+                                    <th scope="col">#</th>
+                                    <th scope="col"> مشتری</th>
+                                    <th scope="col"> تاریخ ثبت  </th>
+                                    <th scope="col"> پزشک</th>
+                                    <th scope="col"> پکیج دریافتی</th>
+                                    <th scope="col"> معاینه </th>
                                     <th scope="col">  عملیات </th>
+
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var CorrectionalProgramMaster in Model.currectionalProgramMasterList)
-                                {
-                                    <tr>
-                                        <td>@CorrectionalProgramMaster.Session.Title</td>
-                                        <td>
-                                            <a asp-controller="CorrectionalProgram" asp-action="CreateDetail" asp-route-masterId="@CorrectionalProgramMaster.Id" class="btn btn-success mx-2">ثبت برنامه</a>
-                                            <a asp-controller="CorrectionalProgram" asp-action="Show" asp-route-masterId="@CorrectionalProgramMaster.Id" class="btn btn-primary mx-2">مشاهده</a>
-                                        </td>
+      
+                                        <tr>
+                                            <td>1</td>
+                                            <td>علس کریمی </td>
+                                            <td>10/10/2020  </td>
+                                            <td>دکتر  مینا احمدی  </td>
+                                            <td>نقره ای  </td>
+                                            <td>
+                                        <a @* asp-controller="Referred" asp-action="Update" asp-route-referredid="@Model[i].Id" *@ class="btn btn-primary mx-2">نمایش معاینه</a>
+                                                </td>
+                                            <td>
+                                        <a @* asp-controller="Referred" asp-action="Update" asp-route-referredid="@Model[i].Id" *@ class="btn btn-info mx-2">نمایش برنامه</a>
 
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>عدم تایید</td>
-                                        <td></td>
-                                        <td>  نام ناظر </td>
-                                        <td>  شعبه </td>
-                                        <td>
-                                            <a asp-controller="Referred" class=" btn btn-success mx-2"> حضور </a>
-                                            <a asp-controller="Referred" class="btn btn-primary mx-2"> تایید مربی</a>
-                                        </td>
-                                    </tr>
-                                }    
-                               
+                                                </td>
+                                        
+                                        </tr>
+                            
                             </tbody>
                         </table>
                     </div>

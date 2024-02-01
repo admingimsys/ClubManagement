@@ -1,0 +1,74 @@
+﻿@using ClubManagement.Domain.Entities
+@model CorrectionalProgramMasterVM
+
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="page-title">لیست جلسات</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">داشبورد</a></li>
+                    <li class="breadcrumb-item active">جلسات برنامه اصلاحی</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="datatable table table-hover table-center mb-0 text-center">
+                            <thead>
+                                <tr>
+                                    <th scope="col">جلسه</th>
+                                    <th scope="col"> عملیات  </th>
+                                    <th scope="col"> تاریخ </th>
+                                    <th scope="col"> ورود</th>
+                                    <th scope="col"> خروج</th>
+                                    <th scope="col"> تایید مربی</th>
+                                    <th scope="col"> تاریخ تایید </th>
+                                    <th scope="col"> ناظر  </th>
+                                    <th scope="col">  شعبه </th>
+                                    <th scope="col">  عملیات </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var CorrectionalProgramMaster in Model.currectionalProgramMasterList)
+                                {
+                                    <tr>
+                                        <td>@CorrectionalProgramMaster.Session.Title</td>
+                                        <td>
+                                            <a asp-controller="CorrectionalProgram" asp-action="CreateDetail" asp-route-masterId="@CorrectionalProgramMaster.Id" class="btn btn-success mx-2">ثبت برنامه</a>
+                                            <a asp-controller="CorrectionalProgram" asp-action="Show" asp-route-masterId="@CorrectionalProgramMaster.Id" class="btn btn-primary mx-2">مشاهده</a>
+                                        </td>
+
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>عدم تایید</td>
+                                        <td></td>
+                                        <td>  نام ناظر </td>
+                                        <td>  شعبه </td>
+                                        <td>
+                                            <a asp-controller="Referred" class=" btn btn-success mx-2"> حضور </a>
+                                            <a asp-controller="Referred" class="btn btn-primary mx-2"> تایید مربی</a>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- /Page Wrapper -->
