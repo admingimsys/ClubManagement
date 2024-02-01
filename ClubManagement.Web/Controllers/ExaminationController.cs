@@ -123,6 +123,10 @@ namespace ClubManagement.Web.Controllers
         {
             return View();
         }
+        public IActionResult Show()
+        {
+            return View();
+        }
 
     }
 }

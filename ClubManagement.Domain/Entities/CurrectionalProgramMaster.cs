@@ -14,7 +14,9 @@ namespace ClubManagement.Domain.Entities
 
         [Key]
         public int Id { get; set; }
-        
+
+        public string Code { get; set; }
+
         public DateOnly? Date { get; set; }
 
         public TimeOnly? EntranceHour { get; set; }

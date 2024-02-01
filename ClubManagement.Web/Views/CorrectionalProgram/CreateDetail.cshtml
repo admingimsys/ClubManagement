@@ -11,69 +11,111 @@
             <div class="card-body">
                 <h4 class="card-title">ثبت برنامه  </h4>
                 <br />
-                @* فیلد ها *@
-                <div class="row col-4">
+                <div class="row">
+                    @* فیلد ها *@
+                    <div class=" col-4">
 
 
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label">ناهنجاری مراجع</label>
-                        <select class="col-lg-9" asp-for="@Model.CurrectionalProgramDetail.ExaminationAnomalieId">
-                            @foreach (var obj in Model.ExaminationAnomalies)
-                            {
-                                <option value="@obj.Id">@obj.Titile</option>
-                            }
-                        </select>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label">حرکت اصلاحی</label>
-                        <select class="col-lg-9" asp-for="@Model.CurrectionalProgramDetail.CorrectiveActionId">
-                            @foreach (var obj in Model.CorrectiveActions)
-                            {
-                                <option value="@obj.Id">@obj.Name</option>
-                            }
-                        </select>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label"> واحد</label>
-                        <select class="col-lg-9" asp-for="@Model.CurrectionalProgramDetail.UnitId">
-                            @foreach (var obj in Model.Units)
-                            {
-                                <option value="@obj.Id">@obj.Title</option>
-                            }
-                        </select>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label"> تعداد ست </label>
-                        <div class="col-lg-9">
-                            <input asp-for="@Model.CurrectionalProgramDetail.SetCount" type="text" class="form-control">
-                            <span asp-validation-for="@Model.CurrectionalProgramDetail.SetCount"></span>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label"> میزان دفعات </label>
-                        <div class="col-lg-9">
-                            <input asp-for="@Model.CurrectionalProgramDetail.SetValue" type="text" class="form-control">
-                            <span asp-validation-for="@Model.CurrectionalProgramDetail.SetValue"></span>
-                        </div>
-                    </div>
-
-
-
-                    <div class="col-xl-12">
                         <div class="form-group row">
-                            <label class="col-lg-3 col-form-label">توضیحات</label>
+                            <label class="col-lg-3 col-form-label">ناهنجاری مراجع</label>
+                            <select class="col-lg-9" asp-for="@Model.CurrectionalProgramDetail.ExaminationAnomalieId">
+                                @foreach (var obj in Model.ExaminationAnomalies)
+                                {
+                                    <option value="@obj.Id">@obj.Titile</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">حرکت اصلاحی</label>
+                            <select class="col-lg-9" asp-for="@Model.CurrectionalProgramDetail.CorrectiveActionId">
+                                @foreach (var obj in Model.CorrectiveActions)
+                                {
+                                    <option value="@obj.Id">@obj.Name</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label"> واحد</label>
+                            <select class="col-lg-9" asp-for="@Model.CurrectionalProgramDetail.UnitId">
+                                @foreach (var obj in Model.Units)
+                                {
+                                    <option value="@obj.Id">@obj.Title</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label"> تعداد ست </label>
                             <div class="col-lg-9">
-                                <textarea rows="4" cols="5" asp-for="@Model.CurrectionalProgramDetail.Description" type="text" class="form-control"></textarea>
-                                <span asp-validation-for="@Model.CurrectionalProgramDetail.Description"></span>
+                                <input asp-for="@Model.CurrectionalProgramDetail.SetCount" type="text" class="form-control">
+                                <span asp-validation-for="@Model.CurrectionalProgramDetail.SetCount"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label"> میزان دفعات </label>
+                            <div class="col-lg-9">
+                                <input asp-for="@Model.CurrectionalProgramDetail.SetValue" type="text" class="form-control">
+                                <span asp-validation-for="@Model.CurrectionalProgramDetail.SetValue"></span>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-xl-12">
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label">توضیحات</label>
+                                <div class="col-lg-9">
+                                    <textarea rows="4" cols="5" asp-for="@Model.CurrectionalProgramDetail.Description" type="text" class="form-control"></textarea>
+                                    <span asp-validation-for="@Model.CurrectionalProgramDetail.Description"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    @* حرکت های ثبت شده *@
+                    <div class=" col-8">
+                        <div class="table-responsive">
+                            <table class="datatable table table-hover table-center mb-0 text-center">
+                                <thead>
+
+                                    <tr>
+                                        
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col"> ناهنجاری</th>
+                                        <th scope="col"> حرکت اصلاحی</th>
+                                        <th scope="col"> ست</th>
+                                        <th scope="col"> مقدار</th>
+                                        <th scope="col"> واحد  </th>
+                                        <th scope="col"> توضیح  </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="col">جلسه یک</th>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td> گردن به جلو </td>
+                                        <td> پرس سینه</td>
+                                        <td>5 </td>
+                                        <td>10 </td>
+                                        <td>دقیقه </td>
+                                        <td>با وزنه کم انجام شود </td>
+
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                @* عکس ها ها *@
-                <div class="row col-8"> </div>
+               
             </div>
 
             <br />

@@ -1,6 +1,6 @@
-﻿@* @using ClubManagement.Domain.Entities
-@model List<Referred> *@
-
+﻿@using ClubManagement.Domain.Entities
+@* @model List<Examination>
+ *@
 
 <div class="content container-fluid">
 
@@ -37,22 +37,25 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @* @for(int i=0 ; i<Model.Count;i++)
+                                {
+                                    <tr>
+                                        <td>@(i+1)</td>
+                                        <td>@string.Join(" ", [Model[i].Referred.Name, Model[i].Referred.Family])</td>
+                                        <td>@Model[i].Date</td>
+                                        <td>@string.Join(" ", [Model[i].User.Name, Model[i].User.Family])</td>
+                                        <td>@Model[i].Package.Title</td>
+                                        <td>
+                                            <a asp-controller="Examination" asp-action="" asp-route-referredid="@Model[i].Id" class="btn btn-primary mx-2">نمایش معاینه</a>
+                                        </td>
+                                        <td>
+                                            <a asp-controller="CorrectionalProgram" asp-action="" asp-route-referredid="@Model[i].Id" class="btn btn-info mx-2">نمایش برنامه</a>
 
-                                <tr>
-                                    <td>1</td>
-                                    <td>علس کریمی </td>
-                                    <td>10/10/2020  </td>
-                                    <td>دکتر  مینا احمدی  </td>
-                                    <td>نقره ای  </td>
-                                    <td>
-                                        <a @* asp-controller="Referred" asp-action="Update" asp-route-referredid="@Model[i].Id" *@ class="btn btn-primary mx-2">نمایش معاینه</a>
-                                    </td>
-                                    <td>
-                                        <a @* asp-controller="Referred" asp-action="Update" asp-route-referredid="@Model[i].Id" *@ class="btn btn-info mx-2">نمایش برنامه</a>
+                                        </td>
 
-                                    </td>
-
-                                </tr>
+                                    </tr>
+                                } *@
+                              
 
                             </tbody>
                         </table>

@@ -17,6 +17,11 @@ namespace ClubManagement.Web.Controllers
         }
         public IActionResult Index()
         {
+            //var allCurrectionalProgramMasters = _context.CurrectionalProgramMaster.GroupBy(u => u.Code).Select(p=>p.).ToList();
+           
+
+       
+
             return View();
         }
         public IActionResult CreateMaster(int ExaminationId)
@@ -27,7 +32,7 @@ namespace ClubManagement.Web.Controllers
                 var SessionGroupId = _context.Packages.Where(u => u.Id == packageId).Select(u => u.Id).FirstOrDefault();
                 var SessionCount = _context.SessionGroups.Where(u => u.Id == SessionGroupId).Select(u => u.Count).FirstOrDefault();
                 var sessionList = _context.Sessions.Where(u => u.SessionGroupId == SessionGroupId).ToList();
-
+                var correctionalProgramMasterCode = Guid.NewGuid().ToString();
                 CorrectionalProgramMasterVM vm = new CorrectionalProgramMasterVM
                 {
                     currectionalProgramMasterList = new List<CurrectionalProgramMaster>()
@@ -36,6 +41,7 @@ namespace ClubManagement.Web.Controllers
                 {
                     var obj = new CurrectionalProgramMaster
                     {
+                        Code= correctionalProgramMasterCode,
                         CreateDate = DateTime.Now,
                         SessionId = sessionList[i].Id,
                         Session = sessionList[i],
@@ -51,7 +57,7 @@ namespace ClubManagement.Web.Controllers
             {
                 TempData["error"] = "خطای سرور";
                 Console.WriteLine(ex);
-                return RedirectToAction("Index", "CorrectionalProgramController");
+                return RedirectToAction("Index", "CorrectionalProgram");
             }
         }
 
@@ -78,6 +84,7 @@ namespace ClubManagement.Web.Controllers
                     var res = _context.Anomalies.Where(u => u.Id == item).FirstOrDefault();
                     vm.ExaminationAnomalies.Add(res);
                 }
+               
                 return View(vm);
             }
             catch (Exception ex)
@@ -99,16 +106,14 @@ namespace ClubManagement.Web.Controllers
                 if (ModelState.IsValid)
                 {
 
-
-
                     CurrectionalProgramDetail currectionalProgramDetailForSave = vm.CurrectionalProgramDetail;
                     currectionalProgramDetailForSave.CreateDate = DateTime.Now;
                     currectionalProgramDetailForSave.CurrectionalProgramMasterId = vm.masterId;
                     _context.CurrectionalProgramDetail.Add(currectionalProgramDetailForSave);
 
                     _context.SaveChanges();
-
-                    return RedirectToAction("Create", "CorrectionalProgram");
+                    TempData["success"] = "ثبت با موفقیت انجام شد";
+                    return RedirectToAction("CreateDetail", "CorrectionalProgram",new { masterId = vm.masterId});
                 }
                 else
                 {
