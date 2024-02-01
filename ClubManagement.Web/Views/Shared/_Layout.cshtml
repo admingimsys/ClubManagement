@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="~/assets/css/style.css">
     <link href="~/css/persian-datepicker.css" rel="stylesheet" />
     <link href="~/css/persiandatepicker.min.css" rel="stylesheet" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -207,6 +208,7 @@
         <!-- Page Wrapper -->
         <div class="page-wrapper">
             <div class="container-fluid">
+                <partial name="_Notification" />
                 @RenderBody()
             </div>
         </div>

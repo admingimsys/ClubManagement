@@ -1,5 +1,5 @@
 ﻿@using ClubManagement.Domain.Entities
-@model ExaminationIndexVM
+@model List<Examination>
 
 <div class="content container-fluid">
     <!-- Page Header -->
@@ -34,25 +34,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @* @for (int i = 0; i < Model.Examinations.Count; i++)
+                                @for (int i = 0; i < Model.Count; i++)
                                 {
-                                    
-                                
-                                
-                                <tr>
-                                    <td>@(i+1)</td>
-                                    <td>@string.Join(" ",[Model.Examinations[i].Referred.Name,Model.Examinations[i].Referred.Family])</td>
-                                    <td>@Model[i].VisitNumber</td>
-                                    <td>@Model[i].Date</td>
-                                    <td>@Model[i].</td>
-                                    <td>مرکزی</td>
-                                    <td>
-                                            <a asp-controller="Examination" asp-action="Delete" asp-route-ExaminationId="@obj.Id" class="btn btn-danger mx-2"><i class="fe fe-trash"></i></a>
-                                            <a asp-controller="Examination" asp-action="Update" asp-route-ExaminationId="@obj.Id" class="btn btn-warning mx-2"><i class="fe fe-pencil"></i></a>
-                                            <a asp-controller="CorrectionalProgramController" asp-action="Create" asp-route-ExaminationId="@obj.Id" class="btn btn-success mx-2">ثبت برنامه اصلاحی</a>
-                                    </td>
-                                </tr>
-                                } *@
+                                    <tr>
+                                        <td>@(i + 1)</td>
+                                        <td>@string.Join(" ", [Model[i].Referred.Name, Model[i].Referred.Family])</td>
+                                        <td>@Model[i].VisitNumber</td>
+                                        <td>@Model[i].Date</td>
+                                        <td>@string.Join(" ", [Model[i].User.Name, Model[i].User.Family])@Model[i].User.Name</td>
+                                        <td>@Model[i].Branch.Name</td>
+                                        <td>
+                                            <a asp-controller="Examination" asp-action="Delete" asp-route-ExaminationId="@Model[i].Id" class="btn btn-danger mx-2"><i class="fe fe-trash"></i></a>
+                                            <a asp-controller="Examination" asp-action="Update" asp-route-ExaminationId="@Model[i].Id" class="btn btn-warning mx-2"><i class="fe fe-pencil"></i></a>
+                                            <a asp-controller="CorrectionalProgramController" asp-action="Create" asp-route-ExaminationId="@Model[i].Id" class="btn btn-success mx-2">ثبت برنامه اصلاحی</a>
+                                        </td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>

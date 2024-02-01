@@ -17,19 +17,39 @@ namespace ClubManagement.Web.Controllers
         }
         public IActionResult Index()
         {
-            var referreds = _context.Referreds.ToList();
-            return View(referreds);
+            try
+            {
+                var referreds = _context.Referreds.ToList();
+                return View(referreds);
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = "خطای سرور";
+                Console.WriteLine(ex);
+                return RedirectToAction("Index", "Home");
+            }
+
         }
 
         public IActionResult Create()
         {
-            ReferredVM vm = new ReferredVM()
+            try
             {
-                IntroductionMethods = _context.IntroductionMethods.ToList(),
-                States = _context.States.ToList()
-            };
-            return View(vm);
+                ReferredVM vm = new ReferredVM()
+                {
+                    IntroductionMethods = _context.IntroductionMethods.ToList(),
+                    States = _context.States.ToList()
+                };
+                return View(vm);
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = "خطای سرور";
+                Console.WriteLine(ex);
+                return RedirectToAction("Index", "Home");
+            }
         }
+
         [HttpPost]
         public IActionResult Create(ReferredVM vm)
         {
@@ -55,12 +75,12 @@ namespace ClubManagement.Web.Controllers
 
                     _context.Referreds.Add(referredForSave);
                     _context.SaveChanges();
-
+                    TempData["success"] = "ذخیره اطلاعات با موفقیت انجام شد";
                     return RedirectToAction("Index", "Referred");
                 }
                 else
                 {
-                    //form is not valid
+                    TempData["error"] = "اطلاعات ورودی صحیح نمیباشد";
                     vm.IntroductionMethods = _context.IntroductionMethods.ToList();
                     vm.States = _context.States.ToList();
                     return View(vm);
@@ -68,10 +88,9 @@ namespace ClubManagement.Web.Controllers
             }
             catch (Exception ex)
             {
-                // handel exeption
-                vm.IntroductionMethods = _context.IntroductionMethods.ToList();
-                vm.States = _context.States.ToList();
-                return View(vm);
+                TempData["error"] = "خطای سرور";
+                Console.WriteLine(ex);
+                return RedirectToAction("Index", "Referred");
             }
         }
 
@@ -95,13 +114,13 @@ namespace ClubManagement.Web.Controllers
                     };
                     return View(vm);
                 }
-
-                //NotFound
+                TempData["error"] = "مشتری مورد نظر یافت نشد";
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //500
+                Console.WriteLine(ex);
+                TempData["error"] = "خطای سرور";
                 return RedirectToAction("Index");
             }
         }
@@ -131,12 +150,12 @@ namespace ClubManagement.Web.Controllers
 
                     _context.Referreds.Update(referredForUpdate);
                     _context.SaveChanges();
-
+                    TempData["error"] = "ویرایش با موفقیت انجام شد";
                     return RedirectToAction("Index", "Referred");
                 }
                 else
                 {
-                    //form is not valid
+                    TempData["error"] = "اطلاعات ورودی صحیح نمی باشد";
                     vm.IntroductionMethods = _context.IntroductionMethods.ToList();
                     vm.States = _context.States.ToList();
                     return View(vm);
@@ -144,7 +163,6 @@ namespace ClubManagement.Web.Controllers
             }
             catch (Exception ex)
             {
-                // handel exeption
                 vm.IntroductionMethods = _context.IntroductionMethods.ToList();
                 vm.States = _context.States.ToList();
                 return View(vm);
@@ -164,6 +182,7 @@ namespace ClubManagement.Web.Controllers
                     //vm.HasPreviousDiet = healthInfo.HasPreviousDiet == true ? "1" : "0";
                     //vm.HasMetallInBody = healthInfo.HasMetallInBody == true ? "1" : "0";
                     //return View(vm);
+                    TempData["error"] = "ویرایش اطلاعات سلامت غیرفعال می باشد";
                     return RedirectToAction("Index");
                 }
                 else
@@ -177,7 +196,7 @@ namespace ClubManagement.Web.Controllers
             }
             catch
             {
-                //exeption 
+                TempData["error"] = "خطای سرور";
                 return RedirectToAction("Index");
             }
         }
@@ -186,25 +205,40 @@ namespace ClubManagement.Web.Controllers
         {
             try
             {
-                vm.healthInfo.HasMetallInBody = vm.HasMetallInBody == "1" ? true : false;
-                vm.healthInfo.HadSurgery = vm.hadSurgery == "1" ? true : false;
-                vm.healthInfo.HasPreviousDiet = vm.HasPreviousDiet == "1" ? true : false;
-                if (vm.healthInfo.Id == 0)
+                if (ModelState.IsValid)
                 {
-                    vm.healthInfo.CreateDate = DateTime.Now;
-                    _context.HealthInfos.Add(vm.healthInfo);
-                    _context.SaveChanges();
+                    vm.healthInfo.HasMetallInBody = vm.HasMetallInBody == "1" ? true : false;
+                    vm.healthInfo.HadSurgery = vm.hadSurgery == "1" ? true : false;
+                    vm.healthInfo.HasPreviousDiet = vm.HasPreviousDiet == "1" ? true : false;
+                    if (vm.healthInfo.Id == 0)
+                    {
+                        vm.healthInfo.CreateDate = DateTime.Now;
+                        _context.HealthInfos.Add(vm.healthInfo);
+                        _context.SaveChanges();
+                        TempData["success"] = "ذخیره با موفقیت انجام شد";
+                    }
+                    else
+                    {
+                        vm.healthInfo.ModifyDate = DateTime.Now;
+                        _context.HealthInfos.Update(vm.healthInfo);
+                        _context.SaveChanges();
+                        TempData["success"] = "ویرایش با موفقیت انجام شد";
+                    }
+                    return RedirectToAction("Index");
                 }
                 else
                 {
-                    vm.healthInfo.ModifyDate = DateTime.Now;
-                    _context.HealthInfos.Update(vm.healthInfo);
-                    _context.SaveChanges();
+                    vm.healthInfo.HasMetallInBody = vm.HasMetallInBody == "1" ? true : false;
+                    vm.healthInfo.HadSurgery = vm.hadSurgery == "1" ? true : false;
+                    vm.healthInfo.HasPreviousDiet = vm.HasPreviousDiet == "1" ? true : false;
+                    TempData["error"] = "اطلاعات ورودی صحیح نمی باشد";
+                    return View(vm);
                 }
-                return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                TempData["error"] = "خطای سرور";
+                Console.WriteLine(ex);
                 return RedirectToAction("Index");
             }
         }
@@ -224,9 +258,10 @@ namespace ClubManagement.Web.Controllers
                     return View(personalInfo);
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                //exeption 
+                TempData["error"] = "خطای سرور";
+                Console.WriteLine(ex);
                 return RedirectToAction("Index");
             }
         }
@@ -235,27 +270,37 @@ namespace ClubManagement.Web.Controllers
         {
             try
             {
-                if (vm.Id == 0)
+                if (ModelState.IsValid)
                 {
-                    vm.CreateDate = DateTime.Now;
-                    _context.PersonalInfos.Add(vm);
-                    _context.SaveChanges();
+                    if (vm.Id == 0)
+                    {
+                        vm.CreateDate = DateTime.Now;
+                        _context.PersonalInfos.Add(vm);
+                        _context.SaveChanges();
+                        TempData["success"] = "ذخیره با موفقیت انجام شد";
+                    }
+                    else
+                    {
+                        vm.ModifyDate = DateTime.Now;
+                        _context.PersonalInfos.Update(vm);
+                        _context.SaveChanges();
+                        TempData["success"] = "ویرایش با موفقیت انجام شد";
+                    }
+                    return RedirectToAction("Index");
                 }
                 else
                 {
-                    vm.ModifyDate = DateTime.Now;
-                    _context.PersonalInfos.Update(vm);
-                    _context.SaveChanges();
+                    TempData["error"] = " اطلاعات ورودی صحیح نمیباشد";
+                    return View(vm);
                 }
-                return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                TempData["error"] = "خطای سرور";
+                Console.WriteLine(ex);
                 return RedirectToAction("Index");
             }
         }
-
-
 
         #region API Call
         [HttpGet]
@@ -270,17 +315,15 @@ namespace ClubManagement.Web.Controllers
                     _context.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                //notfound
+                TempData["error"] = "مشتری مورد نظر یافت نشد";
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //excexptio handel
+                Console.WriteLine(ex);
+                TempData["error"] = "خطای سرور";
                 return RedirectToAction("Index");
             }
-
-
-
         }
         #endregion
 

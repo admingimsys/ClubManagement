@@ -14,7 +14,6 @@
                     <li class="breadcrumb-item"><a href="index.html">داشبورد</a></li>
                     <li class="breadcrumb-item active">مشتریان</li>
                 </ul>
-
             </div>
         </div>
     </div>
@@ -45,7 +44,6 @@
                                     <th scope="col">وضعیت تاهل  </th>
                                     <th scope="col"> کد ملی  </th>
                                     <th scope="col"> عملیات</th>
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -82,9 +80,9 @@
                                                 <a asp-controller="Referred" asp-action="Update" asp-route-referredid="@Model[i].Id" class="btn bg-warning-light mx-2"><i class="fe fe-pencil"></i></a>
                                                 <a asp-controller="Referred" asp-action="Delete" asp-route-referredid="@Model[i].Id" class="btn bg-danger-light mx-2"><i class="fe fe-trash"></i></a>
                                                 <a asp-controller="Referred" asp-action="" asp-route-referredid="@Model[i].Id" class="btn bg-primary-light mx-2"><i class="fe fe-user"></i></a>
-                                                <a asp-controller="Examination" asp-action="Create" class="btn bg-info-light mx-2"><i class="fe fe-plus">معاینه</i></a>
+                                                <a asp-controller="Examination" asp-action="Create" class="btn bg-info-light mx-2">ثبت معاینه</a>
+                                                <a asp-controller="Examination" asp-action="Create" class="btn bg-info-light mx-2">حضورغیاب</a>
                                             </td>
-
                                         </tr>
                                     }
                                 }

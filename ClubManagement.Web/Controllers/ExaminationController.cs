@@ -2,6 +2,7 @@
 using ClubManagement.Infrastructure.Data;
 using ClubManagement.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 namespace ClubManagement.Web.Controllers
@@ -15,13 +16,10 @@ namespace ClubManagement.Web.Controllers
         }
         public IActionResult Index()
         {
-            ExaminationIndexVM vm = new ExaminationIndexVM
-            {
-                Examinations = _context.Examinations.ToList(),
-                Users = _context.Users.ToList(),
-                Branchs = _context.Branches.ToList()
-            };
-            return View(vm);
+
+            List<Examination> Examinations = _context.Examinations.Include("Referred").Include("User").Include("Package").Include("Branch").ToList();
+          
+            return View(Examinations);
         }
         public IActionResult Create()
         {
