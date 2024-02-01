@@ -15,6 +15,10 @@ namespace ClubManagement.Web.Controllers
         {
             _context = context;
         }
+        public IActionResult Index()
+        {
+            return View();
+        }
         public IActionResult CreateMaster(int ExaminationId)
         {
             try

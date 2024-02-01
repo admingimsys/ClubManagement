@@ -46,7 +46,7 @@
                                         <td>
                                             <a asp-controller="Examination" asp-action="Delete" asp-route-ExaminationId="@Model[i].Id" class="btn btn-danger mx-2"><i class="fe fe-trash"></i></a>
                                             <a asp-controller="Examination" asp-action="Update" asp-route-ExaminationId="@Model[i].Id" class="btn btn-warning mx-2"><i class="fe fe-pencil"></i></a>
-                                            <a asp-controller="CorrectionalProgramController" asp-action="CreateMaster" asp-route-ExaminationId="@Model[i].Id" class="btn btn-success mx-2">ثبت برنامه اصلاحی</a>
+                                            <a asp-controller="CorrectionalProgram" asp-action="CreateMaster" asp-route-ExaminationId="@Model[i].Id" class="btn btn-success mx-2">ثبت برنامه اصلاحی</a>
                                         </td>
                                     </tr>
                                 }

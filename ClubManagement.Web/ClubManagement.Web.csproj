@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Content Remove="Views\CorrectionalProgram\CustomerProgram.cshtml" />
-    <Content Remove="Views\CorrectionalProgram\index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,7 +28,6 @@
 
   <ItemGroup>
     <None Include="Views\CorrectionalProgram\CustomerProgram.cshtml" />
-    <None Include="Views\CorrectionalProgram\index.cshtml" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-@* @using ClubManagement.Domain.Entities
+﻿@* @using ClubManagement.Domain.Entities
 @model List<Referred> *@
 
 
@@ -37,23 +37,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-      
-                                        <tr>
-                                            <td>1</td>
-                                            <td>علس کریمی </td>
-                                            <td>10/10/2020  </td>
-                                            <td>دکتر  مینا احمدی  </td>
-                                            <td>نقره ای  </td>
-                                            <td>
+
+                                <tr>
+                                    <td>1</td>
+                                    <td>علس کریمی </td>
+                                    <td>10/10/2020  </td>
+                                    <td>دکتر  مینا احمدی  </td>
+                                    <td>نقره ای  </td>
+                                    <td>
                                         <a @* asp-controller="Referred" asp-action="Update" asp-route-referredid="@Model[i].Id" *@ class="btn btn-primary mx-2">نمایش معاینه</a>
-                                                </td>
-                                            <td>
+                                    </td>
+                                    <td>
                                         <a @* asp-controller="Referred" asp-action="Update" asp-route-referredid="@Model[i].Id" *@ class="btn btn-info mx-2">نمایش برنامه</a>
 
-                                                </td>
-                                        
-                                        </tr>
-                            
+                                    </td>
+
+                                </tr>
+
                             </tbody>
                         </table>
                     </div>
